@@ -1,0 +1,51 @@
+﻿<Window x:Class="FibonachiSequence.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Практическое задание" Height="395" Width="670">
+	<Grid Margin="0,0,30,34">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="235.04" />
+			<RowDefinition Height="50" />
+		</Grid.RowDefinitions>
+		<TabControl Margin="0,0,-25,-89" Grid.RowSpan="2" Height="370" VerticalAlignment="Bottom">
+			<TabItem Header="1">
+				<Grid Background="#FFE5E5E5" Height="342" Margin="0,0,-6,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="Введите число от 1 до 10:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,18,0,0" />
+					<TextBox x:Name="NumberTextBox" Width="95" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,16,0,0" />
+					<TextBlock Text="Последовательность Фибоначчи:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,40,0,0" />
+					<TextBox x:Name="FibonacciTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" Margin="225,41,0,0" Width="95" />
+					<TextBlock Text="Сумма последовательности:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,63,0,0" />
+					<TextBox x:Name="SumTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" Margin="225,67,0,0" Width="95" />
+					<Button x:Name="CalculateButton" Content="Вычислить" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CalculateButton_Click" Margin="220,114,0,0" />
+				</Grid>
+			</TabItem>
+			<TabItem Header="2" Height="20" VerticalAlignment="Top">
+				<Grid Background="#FFE5E5E5" Margin="-3,0,-6,0" Height="344">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="50" />
+						<RowDefinition Height="50" />
+					</Grid.RowDefinitions>
+					<TextBlock Text="Введите текст:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,26,0,0" />
+					<TextBox x:Name="InputTextBox" Width="295" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,47,0,0" Height="175" Grid.RowSpan="2" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" MaxLength="5000000" AcceptsReturn="True" />
+					<TextBlock Text="Длина слов для фильтрации:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,4,0,0" Height="15" Width="162" />
+					<TextBox x:Name="LengthTextBox" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,6,0,0" />
+					<Button x:Name="FilterButton" Content="Фильтровать" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top" Click="FilterButton_Click" Margin="516,6,0,0" Grid.Row="1" />
+					<TextBlock Text="Отфильтрованные слова:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="331,28,0,0" />
+					<TextBox x:Name="FilteredTextBox" Width="240" Height="176" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" Margin="330,47,0,0" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" MaxLength="5000000" />
+					<RadioButton x:Name="CheckText" Content="Текст" HorizontalAlignment="Left" Margin="489,7,0,0" VerticalAlignment="Top"/>
+					<RadioButton x:Name="CheckEmail" Content="Email" HorizontalAlignment="Left" Margin="489,26,0,0" VerticalAlignment="Top"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>
