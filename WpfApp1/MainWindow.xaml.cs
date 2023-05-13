@@ -1,8 +1,11 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FibonachiSequence
 {
@@ -81,7 +84,45 @@ namespace FibonachiSequence
                 await ФильтрацияТекста.SaveToFile("123.txt", str);
             }
         }
+
+        private void Button_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            bool isCorrect = true;
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true) == true)
+            {
+                string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+                foreach (string filename in filenames)
+                {
+                    if (File.Exists(filename) == false)
+                    {
+                        isCorrect = false;
+                        break;
+                    }
+                    FileInfo info = new FileInfo(filename);
+                    if (info.Extension != ".txt")
+                    {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+            }
+            if (isCorrect == true)
+                e.Effects = DragDropEffects.All;
+            else
+                e.Effects = DragDropEffects.None;
+            e.Handled = true;
+        }
+
+        private void Button_PreviewDrop(object sender, DragEventArgs e)
+        {
+            string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+            foreach (string filename in filenames)
+                InputTextBox.Text += File.ReadAllText(filename);
+            e.Handled = true;
+        }
     }
+    
     public static class ФильтрацияТекста
     {
         // Используем регулярное выражение для удаления знаков препинания и пробелов
