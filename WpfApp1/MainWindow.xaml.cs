@@ -121,8 +121,20 @@ namespace FibonachiSequence
                 InputTextBox.Text += File.ReadAllText(filename);
             e.Handled = true;
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                InputTextBox.Text = File.ReadAllText(openFileDialog.FileName);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            InputTextBox.Clear();
+        }
     }
-    
+
     public static class ФильтрацияТекста
     {
         // Используем регулярное выражение для удаления знаков препинания и пробелов
