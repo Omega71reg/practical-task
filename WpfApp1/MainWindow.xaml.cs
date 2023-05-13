@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace FibonachiSequence
@@ -66,11 +68,18 @@ namespace FibonachiSequence
             }
             if (CheckEmail.IsChecked == true)
             {
-                string[] str = Почта.ОтобратьEmail(inputText);
+                string[] str = ФильтрацияТекста.ОтобратьEmail(inputText);
                 FilteredTextBox.Text = string.Join("; ", str);
             }
+        }
+        async private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (FilteredTextBox.Text != "")
+            {
+                string str = FilteredTextBox.Text;
 
-
+                await ФильтрацияТекста.SaveToFile("123.txt", str);
+            }
         }
     }
     public static class ФильтрацияТекста
@@ -86,9 +95,6 @@ namespace FibonachiSequence
 
             return filteredWords;
         }
-    }
-    public static class Почта
-    {
         private const string Email = @"(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
                   + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
                   + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
@@ -99,6 +105,11 @@ namespace FibonachiSequence
             string[] arr = Regex.Matches(inputText, Email).Cast<Match>().Select(x => x.Value).ToArray();
             var str = arr.Select(x => x.ToString()).ToArray();
             return arr;
+        }
+        async public static Task SaveToFile(string path, string text)
+        {
+            using StreamWriter writer = new(path, false);
+            await writer.WriteLineAsync(text);
         }
     }
 }
